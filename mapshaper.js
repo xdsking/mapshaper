@@ -7177,6 +7177,8 @@
       initBooleanField(info, arr, name);
     } else if (type == 'D') {
       initDateField(info, arr, name);
+    } else if (type == 'A') {
+        initStringField(info, arr, name, encoding);
     } else {
       // Treat null fields as empty numeric fields; this way, they will be imported
       // again as nulls.
@@ -7198,6 +7200,10 @@
       if (utils.isNumber(val)) return "N";
       if (utils.isBoolean(val)) return "L";
       if (val instanceof Date) return "D";
+      if (utils.isArray(val)) {
+          arr[i][name]=arr[i][name].toString()
+          return "C";
+      }
       if (val) return (typeof val);
     }
     return null;
